@@ -10,7 +10,7 @@ Given('I am on the Telnyx page and click the cookies', () => {
 });
 //Scenario#1
 When('I scroll to "Explore our products" button  and click into it', () => {
-base.scrollandclick(mainpage.exploreOurProductsBtn);
+base.scrollandclick(mainpage.exploreOurProductsBtn());
 });
 Then('I redirected to the https://telnyx.com/products', () => {
   whatPageWeOn.whatPageWeOn('https://telnyx.com/products');
