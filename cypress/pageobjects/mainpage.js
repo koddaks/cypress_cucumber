@@ -4,7 +4,8 @@ class MainPage {
    }
   
   get exploreOurProductsBtn() {
-    return cy.get('//*[contains(text(),"Explore our products") and @href="/products"]')
+    return
+    // return cy.get('//*[contains(text(),"Explore our products") and @href="/products"]');
   }
 
 
