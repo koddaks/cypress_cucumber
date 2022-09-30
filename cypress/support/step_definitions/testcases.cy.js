@@ -5,7 +5,7 @@ const whatPageWeOn = require("../../e2e/helper/whatPageWeOn");
 
 Given('I am on the Telnyx page and click the cookies', () => {
   base.navigate();
-  // cy.contains('Accept and close').click();
+  cy.contains('Accept and close').click();
 });
 //Scenario#1:
 When('I scroll to “Explore our products” button and click into it', async() => {

@@ -14,6 +14,7 @@ function setConfigurationFromFile(config) {
 
 
 module.exports = defineConfig({
+  projectId: 'v7dtcf',
   e2e: {
     async setupNodeEvents(on, config) {
       setConfigurationFromFile(config);
