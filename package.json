@@ -12,11 +12,12 @@
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
     "@cucumber/cucumber": "^8.6.0",
     "cypress": "^10.9.0",
-    "esbuild": "^0.15.9"
+    "cypress-xpath": "^2.0.1",
+    "esbuild": "^0.15.9",
+    "multiple-cucumber-html-reporter": "^3.0.1"
   },
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^13.0.2",
-    "cypress-real-events": "^1.7.1",
-    "cypress-xpath": "^2.0.1"
+    "cypress-real-events": "^1.7.1"
   }
 }

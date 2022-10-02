@@ -34,8 +34,8 @@ module.exports = defineConfig({
   responseTimeout: 30000,
   screenshotsFolder: 'cypress/screenshots',
   videosFolder: 'cypress/videos', 
-  viewportHeight:	1980,
-  viewportWidth: 1080,
+  viewportHeight:	1080,
+  viewportWidth: 1980,
 e2e: {
   specPattern: "**/*.feature",
   supportFile: false, 

@@ -1,5 +1,5 @@
 class WhatPageWeOn {
-  whatPageWeOn(expectedPage){
+  pageShouldBe(expectedPage){
     cy.location().should((loc) => {
       expect(loc.href).to.eq(expectedPage);
     })
