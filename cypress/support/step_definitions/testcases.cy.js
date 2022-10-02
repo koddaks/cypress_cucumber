@@ -44,3 +44,16 @@ Then('I redirected to “About Us” page', async() => {
         cy.xpath('//h3[contains(text(),"We have fun too!")]').should('be.visible');
         
         });
+        //Scenario#3
+  
+  When('I scroll to the “Momentum leader and highest satisfaction in G2 CPaaS grid” header of the page', async() => {
+    cy.contains('Momentum leader and highest satisfaction in G2 CPaaS grid').scrollIntoView();
+  });
+  Then('I check for a “list of awards and nominations” for summer 2021.', async() => {
+        mainpage.listOfAwardsBestRelationshipSummer.scrollIntoView().should('be.visible');
+        mainpage.listOfAwardsBestResultsSummer.should('be.visible');
+        mainpage.listOfAwardsBestUsabilitySummer.should('be.visible');
+        mainpage.listOfAwardsLeaderSummer.should('be.visible');
+        mainpage.listOfAwardsBestMomentumLeaderSummer.should('be.visible');
+        mainpage.listOfAwardsBestMostImplementableSummer.should('be.visible');        
+       });
