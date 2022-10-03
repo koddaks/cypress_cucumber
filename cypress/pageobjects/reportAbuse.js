@@ -3,11 +3,11 @@ class ReportAbusePage {
   get reCaptchaStart(){   
     return cy.get('[id="recaptcha-accessible-status"]');
   }
-  get reCaptchaImageSelect(){
-    return cy.get('[id="rc-imageselect"]');
+  get reCaptchaImage(){
+    return cy.get('[class="sc-df3e57b4-6 ieJwwQ"]');
   }
-  get reCaptchaForm(){
-    return cy.get('[class="sc-d598de4c-0 hXPsjv"]');
+  get submitBtn(){
+    return cy.get('[type="submit"]');
   }
   
 }
