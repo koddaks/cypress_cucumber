@@ -86,7 +86,8 @@ Then('I redirected to “About Us” page', async() => {
            });
   Then('I check “reCAPTCHA validation”', async() => {
     reportAbusePage.submitBtn.scrollIntoView({ duration: 2000 });
-    reportAbusePage.reCaptchaImage.should('be.visible').screenshot();
+    reportAbusePage.reCaptchaImage.should('be.visible');
+    cy.screenshot();
            });
 
   //Scenario#6
