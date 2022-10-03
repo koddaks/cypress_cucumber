@@ -4,7 +4,7 @@ class ReportAbusePage {
     return cy.get('[id="recaptcha-accessible-status"]');
   }
   get reCaptchaImage(){
-    return cy.get('[class="sc-df3e57b4-6 ieJwwQ"]');
+    return cy.get('[class="sc-d598de4c-0 hXPsjv"]');
   }
   get submitBtn(){
     return cy.get('[type="submit"]');
