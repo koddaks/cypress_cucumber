@@ -25,6 +25,31 @@ class MainPage {
     return cy.get('img[src*="g2-most-implementable-summer-2021__1_.svg?"]');
    }
 
+   get dataPrivacyLink(){
+    return cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(3) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span');
+  }
+  get reportAbuseLink(){
+    return cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(5) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span');
+  }
+  get supportCenterLink(){
+    return cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(4) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span');
+  }
+  
+  get termsAndConditionsLink(){
+    return cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(9) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span');
+  }
+  get facebookLink(){
+    return cy.get('[href="https://www.facebook.com/Telnyx/"]');
+  }
+  get twitterLink(){
+    return cy.get('[href="https://twitter.com/telnyx"]');
+  }
+  get linkedinLink(){
+    return cy.get('[href="https://www.linkedin.com/company/telnyx/"]');
+  }
+
+  
+
 
 }
 
