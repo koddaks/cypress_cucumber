@@ -9,6 +9,20 @@ async function setupNodeEvents(on, config) {
 }
 
 module.exports = defineConfig({
+  projectId: 'v7dtcf',
+  screenshotOnRunFailure:	true,
+  video:true,
+  defaultCommandTimeout: 6000,
+  execTimeout: 5000,
+  taskTimeout: 5000,
+  pageLoadTimeout: 30000,
+  requestTimeout: 5000,
+  responseTimeout: 30000,
+  screenshotsFolder: 'cypress/screenshots',
+  videosFolder: 'cypress/videos',    
+  viewportHeight:	900,
+  viewportWidth: 1600,
+  chromeWebSecurity: false,
     e2e: {
         specPattern: "**/*.feature",
         supportFile: false,
@@ -20,5 +34,5 @@ module.exports = defineConfig({
                 return true;
             },
         },
-    },
+    },    
 });

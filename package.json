@@ -17,6 +17,7 @@
     "@cypress/browserify-preprocessor": "^3.0.2",
     "cucumber-html-reporter": "^5.5.0",
     "cypress": "^10.9.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-xpath": "^2.0.1",
     "esbuild": "^0.15.9",
     "multiple-cucumber-html-reporter": "^3.0.1"

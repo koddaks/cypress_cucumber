@@ -21,10 +21,10 @@ module.exports = defineConfig({
     requestTimeout: 5000,
     responseTimeout: 30000,
     screenshotsFolder: 'cypress/screenshots',
-    videosFolder: 'cypress/videos',
-    device: 'macbook-15',
+    videosFolder: 'cypress/videos',    
     viewportHeight:	900,
-    viewportWidth: 1440,
+    viewportWidth: 1600,
+    chromeWebSecurity: false,
   e2e: {
     specPattern: "**/*.feature",
     supportFile: false,

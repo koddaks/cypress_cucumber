@@ -6,23 +6,27 @@ class MainPage {
    get listOfAwards() {
     return cy.get('div[class="sc-639a09db-0 kDMByb"]');
    }
-   get listOfAwardsBestRelationshipSummer() {
+   get listOfAwardsBestRelationship() {
     return cy.get('img[src*="best-relationship-summer-2021__1_.svg?"]');
    }
-   get listOfAwardsBestResultsSummer() {
-    return cy.get('img[src*="best-results-summer-2021__1_.svg?"]');
+   get listOfAwardsEaseOfUse() {
+    return cy.get('[src*="EaseOfUse.svg?w=94"]');
    }
-   get listOfAwardsBestUsabilitySummer() {
-    return cy.get('img[src*="best-usability-summer-2021__1__1_1.svg?"]');
+   
+   get listOfAwardsBestResults() {
+    return cy.get('[src*="BestResults"]');
    }
-   get listOfAwardsLeaderSummer() {
-    return cy.get('img[src*="g2-leader-summer-2021__1_.svg?"]');
+   get listOfAwardsBestUsability() {
+    return cy.get('[src*="BestUsability"]');
    }
-   get listOfAwardsBestMomentumLeaderSummer() {
-    return cy.get('img[src*="g2-momentum-leader-summer-2021__1_.svg?"]');
+   get listOfAwardsLeader() {
+    return cy.get('[src*="CommunicationPlatformasaService_Leader_Leader"]');
    }
-   get listOfAwardsBestMostImplementableSummer() {
-    return cy.get('img[src*="g2-most-implementable-summer-2021__1_.svg?"]');
+   get listOfAwardsBestMomentumLeader() {
+    return cy.get('[src*="MomentumLeader"]');
+   }
+   get listOfAwardsBestMostImplementable() {
+    return cy.get('[src*="MostLikelyToRecommend"]');
    }
 
    get dataPrivacyLink(){
