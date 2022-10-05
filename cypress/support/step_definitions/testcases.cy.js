@@ -13,20 +13,27 @@ Given('I am on the Telnyx page and click the cookies', () => {
 });
 //Scenario#1
 When('I scroll to “About Us” link at the bottom of the page', async() => {
-cy.xpath('//span[contains(text(),"About Us")]').scrollIntoView();
+// cy.xpath('//span[contains(text(),"About Us")]').scrollIntoView();
+cy.contains('About Us').scrollIntoView();
 });
 Then('I click into “About Us” link', async() => {
-  cy.xpath('//span[contains(text(),"About Us")]').click();
+  // cy.xpath('//span[contains(text(),"About Us")]').click();
+  cy.contains('About Us').click();
   });
 Then('I redirected to “About Us” page', async() => {    
   whatPageWeOn.pageShouldBe('https://telnyx.com/company/about');
   });
   Then('I scroll to the headline “What makes us different”', async() => {    
-    cy.xpath('//h2[contains(text(),"What makes us different")]').scrollIntoView();
-    cy.xpath('//h3[contains(text(),"Security through a global backbone")]').should('be.visible');
-    cy.xpath('//h3[contains(text(),"Multi-cloud uptime")]').should('be.visible');
-    cy.xpath('//h3[contains(text(),"We own our own numbers")]').should('be.visible');
-    cy.xpath('//h3[contains(text(),"Automated number portability")]').should('be.visible');
+    // cy.xpath('//h2[contains(text(),"What makes us different")]').scrollIntoView();
+    cy.contains('What makes us different').scrollIntoView();
+    // cy.xpath('//h3[contains(text(),"Security through a global backbone")]').should('be.visible');
+    cy.contains('Security through a global backbone').should('be.visible');
+    // cy.xpath('//h3[contains(text(),"Multi-cloud uptime")]').should('be.visible');
+    cy.contains('Multi-cloud uptime').should('be.visible');
+    // cy.xpath('//h3[contains(text(),"We own our own numbers")]').should('be.visible');
+    cy.contains('We own our own numbers').should('be.visible');
+    // cy.xpath('//h3[contains(text(),"Automated number portability")]').should('be.visible');
+    cy.contains('Automated number portability').should('be.visible');
     
     });
 
@@ -41,11 +48,16 @@ Then('I redirected to “About Us” page', async() => {
       whatPageWeOn.pageShouldBe('https://telnyx.com/company/careers');
       });
   Then('I scroll to the headline “The Telnyx experience”', async() => {    
-    cy.xpath('//h2[contains(text(),"The Telnyx experience")]').scrollIntoView();
-    cy.xpath('//h3[contains(text(),"Flexible, global team")]').should('be.visible');
-    cy.xpath('//h3[contains(text(),"Modern life, modern space")]').should('be.visible');
-    cy.xpath('//h3[contains(text(),"Helping you grow")]').should('be.visible');
-    cy.xpath('//h3[contains(text(),"We have fun too!")]').should('be.visible');
+    // cy.xpath('//h2[contains(text(),"The Telnyx experience")]').scrollIntoView();
+    cy.contains('The Telnyx experience').scrollIntoView();
+    // cy.xpath('//h3[contains(text(),"Flexible, global team")]').should('be.visible');
+    cy.contains('Flexible, global team').should('be.visible');
+    // cy.xpath('//h3[contains(text(),"Modern life, modern space")]').should('be.visible');
+    cy.contains('Modern life, modern space').should('be.visible');
+    // cy.xpath('//h3[contains(text(),"Helping you grow")]').should('be.visible');
+    cy.contains('Helping you grow').should('be.visible');
+    // cy.xpath('//h3[contains(text(),"We have fun too!")]').should('be.visible');
+    cy.contains('We have fun too!').should('be.visible');
         
         });
 
