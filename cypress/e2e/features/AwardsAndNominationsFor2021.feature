@@ -1,4 +1,4 @@
-Feature: List of awards and nominations for summer 2021
+Feature: Check “List of awards and nominations for summer 2021”
 
   Background:
     Given I am on the Telnyx page and click the cookies

@@ -1,4 +1,4 @@
-Feature: Careers page
+Feature: “Careers” page
 
   Background:
     Given I am on the Telnyx page and click the cookies

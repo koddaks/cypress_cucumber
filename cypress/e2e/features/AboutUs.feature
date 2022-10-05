@@ -1,4 +1,4 @@
-Feature: About Us page
+Feature: “About Us” page
 
   Background:
     Given I am on the Telnyx page and click the cookies
