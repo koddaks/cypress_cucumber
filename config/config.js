@@ -1,50 +1,40 @@
 const { defineConfig } = require("cypress");
-const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const addCucumberPreprocessorPlugin =
-require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
-const createEsbuildPlugin =
-require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
+const preprocessor = require("@badeball/cypress-cucumber-preprocessor");
+const browserify = require("@badeball/cypress-cucumber-preprocessor/browserify");
 
-function setConfigurationFromFile(config) {
-  Object.keys(configQA).forEach(key =>{
-    config[key] = configQA[key];
-  })
+async function setupNodeEvents(on, config) {
+  await preprocessor.addCucumberPreprocessorPlugin(on, config);
+
+  on("file:preprocessor", browserify.default(config));
+
+  // Make sure to return the config object as it might have been modified by the plugin.
+  return config;
 }
 
 module.exports = defineConfig({
+    screenshotOnRunFailure:	true,
+    video:true,
+    defaultCommandTimeout: 6000,
+    execTimeout: 5000,
+    taskTimeout: 5000,
+    pageLoadTimeout: 30000,
+    requestTimeout: 5000,
+    responseTimeout: 30000,
+    screenshotsFolder: 'cypress/screenshots',
+    videosFolder: 'cypress/videos',
+    device: 'macbook-15',
+    viewportHeight:	900,
+    viewportWidth: 1440,
   e2e: {
-    async setupNodeEvents(on, config) {
-      const bundler = createBundler({
-        plugins: [createEsbuildPlugin(config)],
-      });
-      on("file:preprocessor", bundler);
-      await addCucumberPreprocessorPlugin(on, config);
-
-      return config;
-    },    
-    chromeWebSecurity: false,
+    specPattern: "**/*.feature",
+    supportFile: false,
+    setupNodeEvents,
+    devServer: {
+      delay: 500,
+      force404: false,
+      ignore: (xhr) => {
+          return true;
+    },
   },
-  screenshotOnRunFailure:	true,
-  video:true,
-  defaultCommandTimeout: 6000,
-  execTimeout: 5000,
-  taskTimeout: 5000,
-  pageLoadTimeout: 30000,
-  requestTimeout: 5000,
-  responseTimeout: 30000,
-  screenshotsFolder: 'cypress/screenshots',
-  videosFolder: 'cypress/videos', 
-  viewportHeight:	1080,
-  viewportWidth: 1980,
-e2e: {
-  specPattern: "**/*.feature",
-  supportFile: false, 
-  devServer: {
-    delay: 500,
-    force404: false,
-    ignore: (xhr) => {
-        return true;
   },
-},
-},
 });

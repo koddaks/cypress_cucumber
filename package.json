@@ -4,7 +4,10 @@
   "description": "cypres plus cucumber",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress:open": "cypress open",
+    "cypress:run": "npx cypress run",
+    "cypress:config": "npx cypress run --config-file config/config.js",
+    "cypress:report": "node cucumber-html-report.js"
   },
   "author": "koddaks",
   "license": "ISC",
@@ -12,6 +15,7 @@
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
     "@cucumber/cucumber": "^8.6.0",
     "@cypress/browserify-preprocessor": "^3.0.2",
+    "cucumber-html-reporter": "^5.5.0",
     "cypress": "^10.9.0",
     "cypress-xpath": "^2.0.1",
     "esbuild": "^0.15.9",

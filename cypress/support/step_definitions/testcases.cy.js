@@ -93,7 +93,7 @@ Then('I redirected to “About Us” page', async() => {
   //Scenario#6
    Given('I am on the Support Center page', () => {
    base.navigateToSupportCenter();
-   whatPageWeOn.pageShouldBe('https://support.telnyx.com/en/')
+   whatPageWeOn.pageShouldBe('https://support.telnyx.com/en/');
           });
   When('I type “Sign up” in search field and press Enter on the keyboard', async() => {
     supportCenter.searchField.type('Sign up{Enter}');
@@ -104,7 +104,7 @@ Then('I redirected to “About Us” page', async() => {
     whatPageWeOn.pageShouldBe('https://support.telnyx.com/en/articles/5295540-how-to-sign-up-for-a-telnyx-account');
            });
   Then('I scroll to header “Signing up for an account” and find example registration form image under it', async() => {
-    supportCenter.searchResultSignUpImage.screenshot();
+    supportCenter.searchResultSignUpImage.scrollIntoView({ duration: 2000 }).should('be.visible').screenshot();
            });
 
   //Scenario#7  

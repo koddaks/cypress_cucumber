@@ -1,33 +1,24 @@
 const { defineConfig } = require("cypress");
-const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const addCucumberPreprocessorPlugin =
-require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
-const createEsbuildPlugin =
-require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
-const configQA = require("./config/config");
+const preprocessor = require("@badeball/cypress-cucumber-preprocessor");
+const browserify = require("@badeball/cypress-cucumber-preprocessor/browserify");
 
-function setConfigurationFromFile(config) {
-  Object.keys(configQA).forEach(key =>{
-    config[key] = configQA[key];
-  })
+async function setupNodeEvents(on, config) {
+    await preprocessor.addCucumberPreprocessorPlugin(on, config);
+    on("file:preprocessor", browserify.default(config));
+    return config;
 }
 
-
 module.exports = defineConfig({
-  projectId: 'v7dtcf',
-  e2e: {
-    async setupNodeEvents(on, config) {
-      setConfigurationFromFile(config);
-      const bundler = createBundler({
-        plugins: [createEsbuildPlugin(config)],
-      });
-      on("file:preprocessor", bundler);
-      await addCucumberPreprocessorPlugin(on, config);
-
-      return config;
+    e2e: {
+        specPattern: "**/*.feature",
+        supportFile: false,
+        setupNodeEvents,
+        devServer: {
+            delay: 500,
+            force404: false,
+            ignore: (xhr) => {
+                return true;
+            },
+        },
     },
-    specPattern: "cypress/e2e/features/*.feature",
-    baseUrl: "https://telnyx.com",
-    chromeWebSecurity: false,
-  },
 });
