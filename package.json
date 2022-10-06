@@ -1,5 +1,5 @@
 {
-  "name": "cypress_cucumber", 
+  "name": "cypress_cucumber",
   "scripts": {
     "cypress:open": "cypress open",
     "cypress:run": "npx cypress run",
