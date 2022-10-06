@@ -194,6 +194,5 @@ Then('I redirected to “About Us” page', async() => {
   });
   Then('I redirected to “LinkedIn” page', async() => {    
   whatPageWeOn.currentUrlShouldInclude('linkedin.com');
-  cy.screenshot();
-  // cy.get('[class="focus-page"]').screenshot(); I have exception. idkn why? but screenshot is done.
+  cy.screenshot();  
 });
