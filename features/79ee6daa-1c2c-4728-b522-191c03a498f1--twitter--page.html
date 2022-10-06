@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../assets/js/darkmode.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="public">
+    <title>Multiple Cucumber HTML Reporter</title>
+
+    
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="../assets/css/bootstrap.min.css" >
+
+            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+            <!--[if lt IE 9]>
+            <script src="../assets/js/html5shiv.min.js"></script>
+            <script src="../assets/js/respond.min.js"></script>
+            <![endif]-->
+
+            <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+    
+
+    <!-- Custom Theme Style -->
+    <style type="text/css">
+        body {
+    color: #73879C;
+    background: #F7F7F7;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
+}
+
+.main_container {
+    padding: 10px 20px 0;
+}
+
+i span {
+    display: none;
+}
+
+/* Navigation */
+nav.navbar {
+    background: #EDEDED;
+    border-bottom: 1px solid #D9DEE4;
+    margin-bottom: 0;
+}
+
+nav .navbar-brand {
+    border-right: 1px solid #D9DEE4;
+    color: #5A738E;
+}
+
+nav .navbar-text {
+    font-size: 18px;
+    height: 50px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 15px 0;
+    float: right;
+}
+
+/* Table */
+table {
+    width: 100%;
+}
+
+table.chart tr th:first-of-type {
+    width: 33.333%;
+}
+
+.table > thead > tr > th {
+    background: #F5F7FA;
+}
+
+table.tile h3, table.tile h4, table.tile span {
+    font-weight: bold;
+    vertical-align: middle !important;
+}
+
+table.tile th, table.tile td {
+    text-align: center;
+}
+
+table.tile th {
+    border-bottom: 1px solid #E6ECEE;
+}
+
+table.tile td {
+    padding: 5px 0;
+}
+
+table.tile td ul {
+    text-align: left;
+    padding-left: 0;
+}
+
+table.tile td ul li {
+    list-style: none;
+    width: 100%;
+}
+
+table.tile td ul li a {
+    width: 100%;
+}
+
+table.tile td ul li a big {
+    right: 0;
+    float: right;
+    margin-right: 13px;
+}
+
+table.tile_info {
+    width: 100%;
+}
+
+table.tile_info td {
+    text-align: left;
+    padding: 1px;
+    font-size: 15px;
+}
+
+table.tile_info td p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    line-height: 28px;
+}
+
+table.tile_info td i {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 17px;
+    float: left;
+    width: 18px;
+    line-height: 28px;
+    text-align: center;
+}
+
+table.tile_info td:first-child {
+    width: 65%;
+}
+
+td span {
+    line-height: 28px;
+}
+
+table.tile_info td.percentage {
+    text-align: right;
+
+}
+
+/* chart in table */
+table td.chart {
+    display: inline-block;
+    position: relative;
+}
+
+table td.chart #feature-chart,
+table td.chart #scenario-chart,
+table td.chart .total {
+    height: 140px;
+    margin: 15px 10px 10px 0;
+    width: 140px;
+}
+
+table td.chart .total {
+    display: inline-block;
+    position: absolute;
+    font-size: 2em;
+    height: 50px;
+    line-height: 50px;
+    top: 45px;
+    left: 45px;
+    text-align: center;
+    vertical-align: middle;
+    width: 50px;
+}
+
+/* colors */
+.ambiguous-color {
+    color: #E74C3C !important;
+}
+
+.failed-color {
+    color: #E74C3C !important;
+}
+
+.not-defined-color {
+    color: #F39C12 !important;
+}
+
+.passed-color {
+    color: #1ABB9C !important;
+}
+
+.pending-color {
+    color: #FFD119 !important;
+}
+
+.skipped-color {
+    color: #3498DB !important;
+}
+
+/* backgrounds */
+.ambiguous-background {
+    background: #b73122 !important;
+}
+
+.failed-background {
+    background: #E74C3C !important;
+}
+
+.not-defined-background {
+    background: #F39C12 !important;
+}
+
+.passed-background {
+    background: #1ABB9C !important;
+}
+
+.pending-background {
+    background: #FFD119 !important;
+}
+
+.skipped-background {
+    background: #3498DB !important;
+}
+
+/* general */
+.x_panel {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+    opacity: 1;
+}
+
+.x_title {
+    border-bottom: 2px solid #E6E9ED;
+    padding: 1px 5px 6px;
+    margin-bottom: 10px;
+}
+
+.x_title .filter {
+    width: 40%;
+    float: right;
+}
+
+.x_title h2 {
+    margin: 5px 0 6px;
+    float: left;
+    font-size: 24px;
+    font-weight: 400;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.fixed_height_320 {
+    height: 320px;
+}
+
+.x_title span {
+    color: #BDBDBD;
+}
+
+.x_content {
+    padding: 0 5px 6px;
+    position: relative;
+    width: 100%;
+    float: left;
+    clear: both;
+    margin-top: 5px;
+}
+
+.x_content h4 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.panel_toolbox {
+    float: right;
+    margin: 5px 0 0;
+    min-width: 70px;
+}
+
+.panel_toolbox > li {
+    float: right;
+}
+
+.panel_toolbox > li > a {
+    cursor: pointer;
+}
+
+.panel_toolbox > li > a {
+    padding: 5px;
+    color: #C5C7CB;
+    font-size: 14px;
+}
+
+.panel_toolbox > li > a:hover {
+    background: #F5F7FA;
+}
+
+.page-title {
+    width: 100%;
+    padding: 10px 0 30px 0;
+}
+
+.page-title {
+    display: block;
+}
+
+.page-title h1 {
+    margin: 9px 0 9px 13px;
+    font-size: 30px;
+
+}
+
+.page-title .title_right {
+    width: 55%;
+    float: left;
+    display: block;
+}
+
+.page-title .title_right .pull-right {
+    margin: 10px 0;
+}
+
+.page-title p {
+    margin-left: 15px;
+}
+
+.dashboard-widget-content {
+    padding-top: 9px;
+}
+
+.dashboard-widget-content .sidebar-widget {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    background: #fff;
+    border: 1px solid #abd9ea;
+    border-radius: 5px;
+    text-align: center;
+    float: right;
+    padding: 2px;
+    margin-top: 10px;
+}
+
+ul.quick-list {
+    padding-left: 0;
+    display: inline-block;
+}
+
+ul.quick-list li,
+table.quick-list tr {
+    padding-left: 10px;
+    list-style: none;
+    margin: 0;
+    padding-bottom: 6px;
+    padding-top: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+ul.quick-list li .meta-data-title,
+table.quick-list td.meta-data-title {
+    display: inline-block;
+    min-width: 75px;
+    font-weight: bold;
+}
+
+ul.quick-list li span,
+table.quick-list td {
+    line-height: 28px;
+}
+
+ul.quick-list li,
+table.quick-list tr {
+    border-bottom: 1px solid #efefef;
+    padding: 0.5em 0;
+}
+
+ul.quick-list li:last-child,
+table.quick-list tr:last-child {
+    border-bottom: none;
+}
+
+ul.quick-list li i {
+    padding-right: 10px;
+    color: #757679;
+}
+
+.screenshot{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/* Features / Scenarios */
+ul.panel_toolbox li .step {
+    border-radius: 50%;
+    color: #ffffff;
+    display: block;
+    font-size: 14px;
+    height: 30px;
+    margin-right: 5px;
+    padding: 5px;
+    text-align: center;
+    width: 30px;
+}
+
+.scenario-step-container {
+    margin-bottom: 10px;
+}
+
+.scenario-step-container .label {
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+}
+
+.scenario-step-container .text {
+    display: inline;
+}
+
+.scenario-step-container .duration {
+    position: relative;
+    float: right;
+}
+
+.scenario-step-container .text .keyword.highlight {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.scenario-scroll-bar {
+    overflow-x: scroll;
+}
+
+.scenario-step-collapse,
+.scenario-scroll-bar .arguments {
+    margin-left: 30px;
+    width: auto;
+}
+
+/* media */
+@media (max-width: 1200px) {
+    .x_title h2 {
+        width: 70%;
+    }
+}
+
+@media (max-width: 640px) {
+    .x_title h2 {
+        width: 100%;
+    }
+}
+
+/* override */
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    background: #1ABB9C;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
+    background: #E74C3C;
+}
+
+.created-by {
+    padding: 50px 0;
+    text-align: center;
+}
+
+body.darkmode,
+body.darkmode div.created-by,
+body.darkmode .dropdown-menu
+{
+    background: #212121 !important;
+    color: #b4bfca;
+    border-color: #2e2e2e;
+}
+
+body.darkmode .x_panel
+{
+    background: #1c1c21 !important;
+    color: #b4bfca;
+    border: 1px solid #2e2e2e;
+}
+
+body.darkmode div.container-fluid
+{
+    background: #2b2b2b !important;
+    color: #b4bfca;
+    border: 0 solid #2e2e2e;
+}
+
+body.darkmode nav.navbar {
+    background: #2b2b2b;
+    border-bottom: 1px solid #313a45;
+    margin-bottom: 0;
+}
+
+body.darkmode .x_title {
+    background: #1c1c21 !important;
+    border-bottom: 2px solid #2e2e2e;
+    padding: 1px 5px 6px;
+    margin-bottom: 10px;
+}
+
+body.darkmode table.quick-list  tr {
+    border-bottom: 1px solid #292929;
+    padding: 0.5em 0;
+}
+
+body.darkmode ul.quick-list li,
+body.darkmode table.quick-list tr {
+    border-bottom: 1px solid #2e2e2e;
+    padding: 0.5em 0;
+}
+
+.darkModeIcon {
+    font-size: x-large;
+    float: left;
+    padding-top: 12px;
+    padding-left: 4px;
+    cursor: pointer;
+    color: #b4bfca;
+    border-color: #2e2e2e;
+}
+
+.darkModeIcon:before {
+    content: '';
+}
+
+body.darkmode a.navbar-default,
+body.darkmode a.navbar-brand {
+    color: #b1bfcd;
+    background: transparent !important;
+    border-right: 1px solid #313a45;
+}
+
+body.darkmode a {
+    background: transparent !important;
+    color: #9cc2e3;
+    border-color: #2e2e2e;
+}
+
+body.darkmode a.collapse-link {
+    color: #c7c7c7;
+    border-color: #2e2e2e;
+}
+
+body.darkmode li:not([class])>a[id] {
+    color: white;
+}
+body.darkmode li:not([class])>a[id]:hover {
+    background: darkslateblue;
+}
+
+body.darkmode #features-table {
+    color: #b4bfca;
+    border-color: #2e2e2e;
+}
+
+body.darkmode #features-table th {
+    background: #212121 !important;
+    color: #a3c2db;
+    border-color: #2e2e2e;
+}
+
+body.darkmode #features-table td {
+    border-color: #2e2e2e;
+}
+
+body.darkmode #features-table tr:nth-of-type(odd) {
+    background: #212121 !important;
+    border-color: #2e2e2e;
+}
+
+body.darkmode table.dataTable>tbody>tr.child ul.dtr-details li {
+    border-bottom: 1px solid #2e2e2e;
+    padding: 0.5em 0;
+}
+
+body.darkmode .pagination,
+body.darkmode .pagination>.active>a,
+body.darkmode .pagination>.active>a:focus,
+body.darkmode .pagination>.active>a:hover,
+body.darkmode .pagination>.active>span,
+body.darkmode .pagination>.active>span:focus,
+body.darkmode .pagination>.active>span:hover {
+    background: #3a7ab7;
+    border-color: #3a7ab7;
+}
+
+body.darkmode .pagination>.disabled>a,
+body.darkmode .pagination>.disabled>a:focus,
+body.darkmode .pagination>.disabled>a:hover,
+body.darkmode .pagination>.disabled>span,
+body.darkmode .pagination>.disabled>span:focus,
+body.darkmode .pagination>.disabled>span:hover {
+    background: #3a7ab7;
+    border-color: #3b3b3b;
+    color: #bfbfbf;
+}
+
+body.darkmode table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child::before,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child::before {
+    border: 1px solid #2e2e2e;
+}
+
+body.darkmode #features-table>thead>tr {
+    color: #b4bfca;
+    border-color: #2e2e2e;
+}
+
+body.darkmode .form-control {
+    background: #212121 !important;
+    color: #c3c3c3;
+    border-color: #2e2e2e;
+}
+body.darkmode li[id*=features]>a {
+    background: #212121 !important;
+}
+
+body.darkmode .btn-info {
+    color: #b4bfca;
+    background: #337ab7;
+    border-color: #337ab7;
+}
+
+body.darkmode .panel_toolbox > li > a:hover {
+    background: transparent;
+}
+
+body.darkmode .table-striped>tbody>tr:nth-of-type(even) {
+    background: #1c1c21;
+}
+
+body.darkmode div pre {
+    background: #212121 !important;
+    color: #b4bfca;
+}
+
+body.darkmode span.tag {
+    color: #b4bfca;
+}
+
+body.darkmode .keyword {
+    color: #b4bfca;
+}
+
+body.darkmode div.tags ~h1 {
+    color: #b4bfca;
+}
+
+body.darkmode div.tags ~h2 {
+    color: #b4bfca;
+}
+
+body.darkmode div.tags ~h1 small {
+    color: #bfbfbf;
+}
+
+body.darkmode div.tags ~h2 small {
+    color: #bfbfbf;
+}
+
+svg#moon, svg#sun {
+    width: 40px;
+    height: 30px;
+    fill: #ec6d04;
+}
+
+input#darkCheck:checked ~ label>svg#sun {
+    display: none;
+    border-color: #212121;
+}
+
+label>svg#moon {
+    display: none;
+}
+
+input#darkCheck:checked ~ label>svg#moon {
+    display: inline-block;
+    fill: #b4bfca;
+    border-color: #212121;
+}
+
+        
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        window.onload = function() {
+            if(window.localStorage['darkmode'] === 'on') {
+                applyFontStyle();
+            }
+        }
+    </script>
+    <nav class="navbar">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" onclick="history.back(-1)">
+                    <i class="fa fa-arrow-left"><span>Back</span></i>
+                </a>
+            </div>
+            <p class="navbar-text" style="float: left">Features Overview
+            </p>
+            <p class="navbar-text">Multiple Cucumber HTML Reporter</p>
+        </div>
+
+    </nav>
+
+    <div class="main_container">
+
+        <div class="page-title">
+            <div class="tags">
+                
+            </div>
+            <h1>Feature:
+                <small>“Twitter” page</small>
+            </h1>
+            
+                <p>
+               <p><strong>File name:</strong>
+                    Twitter.feature
+                </p>
+                <p><strong>Relative path:</strong>
+                    features/Twitter.feature</p>
+            
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <div class="x_panel fixed_height_320">
+                    <div class="x_title">
+    <h2>Scenarios</h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li>
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
+<div class="x_content">
+    <table class="chart">
+        <tr>
+            <th>
+                <p>Chart</p>
+            </th>
+            <th>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <p class="">Status</p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                    <p class="" style="float:right;">Progress</p>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <td class="chart">
+                <canvas id="scenario-chart"></canvas>
+                <div class="total">1</div>
+            </td>
+            <td>
+                <table class="tile_info">
+                    <tr>
+                        <td>
+                            <p data-toggle="tooltip" data-placement="left" title="Scenario passed">
+                                <i class="fa fa-check-circle passed-color"></i>
+                                Passed
+                            </p>
+                        </td>
+                        <td class="percentage">100.00 %</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p data-toggle="tooltip" data-placement="left" title="Scenario failed">
+                                <i class="fa fa-exclamation-circle failed-color"></i>
+                                Failed
+                            </p>
+                        </td>
+                        <td class="percentage">0.00 %</td>
+                    
+                    
+                    </tr>
+                    
+                    
+                </table>
+            </td>
+        </tr>
+        
+    </table>
+</div>
+
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-xs-12">
+                <div class="x_panel fixed_height_320">
+                    <div class="x_title">
+    <h2>Metadata</h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li>
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
+<div class="x_content">
+    <div class="dashboard-widget-content">
+        <ul class="quick-list">
+            <li>
+                <span class="meta-data-title">
+                    <i class="fa fa-desktop fa-lg"></i>
+                    <i class="fa fa-mobile fa-lg"></i>
+                </span>
+                <span class="meta-data-data">
+                    
+                    
+                    
+                    
+                    <i class="fa fa-desktop fa-lg">
+                        <span>desktop</span>
+                    </i>
+                </span>
+            </li>
+            <li>
+                <span class="meta-data-title">Device</span>
+                <span class="meta-data-data">Local test machine</span>
+            </li>
+            <li>
+                <span class="meta-data-title">OS</span>
+                <span class="meta-data-data">
+                    
+                    
+                    
+                    
+                    <i class="fa fa-windows fa-lg">
+                        <span>windows</span>
+                    </i>
+                    10
+                </span>
+            </li>
+            
+            
+            <li>
+                <span class="meta-data-title">Browser</span>
+                <span class="meta-data-data">
+                    
+                    
+                    
+                    
+                    
+                    <i class="fa fa-chrome fa-lg">
+                        <span>chrome</span>
+                    </i>
+                    106
+                    
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+        <div class="dropdown pull-right dropup" >
+            <button class="btn btn-info dropdown-toggle btn-sm" type="button" data-toggle="dropdown" style="margin-bottom: 15px;">
+                Filter By<span class="caret" style="margin-left: 5px"></span></button>
+            <ul class="dropdown-menu">
+                <li> <a id="passed" href="javascript:void(0)" onclick="hideResult(this.id)">Passed
+                    <i class="fa fa-check-circle passed-color filter-i"></i></a>
+                </li>
+                <li> <a id="failed" href="javascript:void(0)" onclick="hideResult(this.id)">Failed
+                    <i class="fa fa-exclamation-circle failed-color filter-i"></i></a>
+                </li>
+                <li> <a id="pending" href="javascript:void(0)" onclick="hideResult(this.id)">Pending
+                    <i class="fa fa-minus-circle pending-color filter-i"></i></a>
+                </li>
+                <li> <a id="skipped" href="javascript:void(0)" onclick="hideResult(this.id)">Skipped
+                    <i class="fa fa-arrow-circle-right fa skipped-color filter-i"></i></a>
+                </li>
+                <li> <a id="not-defined" href="javascript:void(0)" onclick="hideResult(this.id)">Not Defined
+                    <i class="fa fa-question-circle not-defined-color filter-i"></i></a>
+                </li>
+                <li> <a id="ambiguous" href="javascript:void(0)" onclick="hideResult(this.id)">Ambiguous
+                    <i class="fa fa-flash ambiguous-color filter-i"></i></a>
+                </li>
+                <li class="divider"></li>
+                <li> <a id="clear" href="javascript:void(0)"onclick="showAll()">Clear
+                    <i class="fa fa-times-circle"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="height: auto;">
+            <div class="x_title">
+
+                <div class="tags">
+                    
+                </div>
+
+                <h2>Background: <small></small></h2>
+
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
+                    </li>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                        <li>
+                            <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">1</span>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content" style="display: none;">
+                <div class="scenario-step-container"></div>
+                    
+                        
+                            <div class="scenario-step-container">
+
+                                
+                                    
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-toggle="tooltip" data-placement="top" title="Step passed"></i>
+                                        </div>
+                                    
+                                
+
+                                <div class="text">
+                                    <span class="keyword highlight">Given </span>
+
+                                    
+                                        I am on the Telnyx page and click the cookies
+                                        
+                                    
+
+                                    
+
+                                </div>
+
+                                
+                                    
+
+                                    
+
+                                    
+                                    
+                                    
+
+                                    
+
+                                    
+
+                                    
+                                
+                            </div>
+
+                        
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+                        
+
+                        
+
+                    
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="height: auto;">
+            <div class="x_title">
+
+                <div class="tags">
+                    
+                </div>
+
+                <h2>Scenario: <small>Check redirect to “Twitter”.</small></h2>
+
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
+                    </li>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                        <li>
+                            <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">3</span>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content" style="display: none;">
+                <div class="scenario-step-container"></div>
+                    
+                        
+                            <div class="scenario-step-container">
+
+                                
+                                    
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-toggle="tooltip" data-placement="top" title="Step passed"></i>
+                                        </div>
+                                    
+                                
+
+                                <div class="text">
+                                    <span class="keyword highlight">When </span>
+
+                                    
+                                        I scroll to “Follow on Twitter” link at the bottom of the page
+                                        
+                                    
+
+                                    
+
+                                </div>
+
+                                
+                                    
+
+                                    
+
+                                    
+                                    
+                                    
+
+                                    
+
+                                    
+
+                                    
+                                
+                            </div>
+
+                        
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+                        
+
+                        
+
+                    
+                
+                        
+                            <div class="scenario-step-container">
+
+                                
+                                    
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-toggle="tooltip" data-placement="top" title="Step passed"></i>
+                                        </div>
+                                    
+                                
+
+                                <div class="text">
+                                    <span class="keyword highlight">Then </span>
+
+                                    
+                                        I click into “Follow on Twitter” link
+                                        
+                                    
+
+                                    
+
+                                </div>
+
+                                
+                                    
+
+                                    
+
+                                    
+                                    
+                                    
+
+                                    
+
+                                    
+
+                                    
+                                
+                            </div>
+
+                        
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+                        
+
+                        
+
+                    
+                
+                        
+                            <div class="scenario-step-container">
+
+                                
+                                    
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-toggle="tooltip" data-placement="top" title="Step passed"></i>
+                                        </div>
+                                    
+                                
+
+                                <div class="text">
+                                    <span class="keyword highlight">Then </span>
+
+                                    
+                                        I redirected to “Twitter” page
+                                        
+                                    
+
+                                    
+
+                                </div>
+
+                                
+                                    
+
+                                    
+
+                                    
+                                    
+                                    
+
+                                    
+
+                                    
+                                        <a href="#info1-2-image" data-toggle="collapse">+ Screenshot</a>
+                                    
+
+                                    
+                                
+                            </div>
+
+                        
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+                                <div id="info1-2-image" class="scenario-step-collapse collapse">
+                                    
+                                        <img class="screenshot" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAAAALQCAYAAADPfd1WAAAaPUlEQVR4AezBPZAeBn0n4N/+9t1XNpKtWTXWDKwa0axVKI3H6NSExhuKVMGmj6E3zvUx/WFdf0Afm6uopAYaYjM0qLDcoMYSM1IjjXRSsPZDexAgmPARx9iy9X+f51k7/JUAAAAAACM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAwVgMAAAAAjNUAAAAAAGM1AAAAAMBYDQAAAAAw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z++cO7keAODx0QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAAAAYzUAAAAAwFgNAAAAADBWAwAAAACM1QAAAADw/9uDAxIAAAAEQNH/0f0IFW41AAAAAMCtBgAAAAC41QAAAAAAtxoAAAAA4FYDAAAAANxqAAAAAIBbDQAAAABwqwEAAAAAbjUAAAAAwK0GAAAAALjVAAAAAAC3GgAAAADgVgMAAAAA3GoAAAAAgFsNAAAAAHCrAQAAAABuNQAAAADArQYAAAAAuNUAAAAAALcaAAAAAOBWAwAAAADcagAAAACAWw0AAAAAcKsBAAAAAG41AAAAAMCtBgAAAAC41QAAAAAAtxoAAAAA4FYDAAAAANxqAAAAAIBbDQAAAABwqwEAAAAAbjUAAAAAwK0GAAAAALjVAAAAAAC3GgAAAADgVgMAAAAA3GoAAAAAgFsNAAAAAHCrAQAAAABuNQAAAADArQYAAAAAuNUAAAAAALcaAAAAAOBWAwAAAADcagAAAACAWw0AAAAAcKsBAAAAAG41AAAAAMCtBgAAAAC41QAAAAAAtxoAAAAA4FYDAAAAANxqAAAAAIBbA+tMLMIYDyZmAAAAAElFTkSuQmCC"/>
+                                    
+                                </div>
+                            
+
+                            
+                        
+
+                        
+
+                    
+                
+            </div>
+        </div>
+    </div>
+
+
+        </div>
+    </div>
+
+    
+        <div class="created-by">
+            <p>Created by wswebcreation. Find me on:</p>
+            <a href="http://www.wswebcreation.nl/" target="_blank"><i class="fa fa-rss-square fa-2x"></i></a>
+            <a href="https://github.com/wswebcreation/" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+            <a href="http://nl.linkedin.com/in/wimselles" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+            <a href="http://stackoverflow.com/users/5911978/wswebcreation" target="_blank"><i class="fa fa-stack-overflow fa-2x"></i></a>
+        </div>
+    
+
+    
+        <script src="../assets/js/jquery-3.2.1.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/Chart.min.js"></script>
+    
+
+    <!-- Custom -->
+    <script>
+        var hideResult;
+        var showAll;
+        $(document).ready(function () {
+
+            var scenarioOptions = {
+                legend: false,
+                responsive: false
+            };
+
+            var getColor = function(selector, defaultColor) {
+                if (document.querySelector(selector)) {
+                    return getComputedStyle(document.querySelector(selector)).color
+                }
+                return defaultColor
+            }
+
+            new Chart(document.getElementById("scenario-chart"), {
+                type: 'doughnut',
+                tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                data: {
+                    labels: [
+                        "Passed",
+                        "Failed",
+                        "Pending",
+                        "Skipped",
+                        "Ambiguous",
+                        "Not defined"
+                    ],
+                    datasets: [{
+                        data: [
+                            1,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        backgroundColor: [
+                            getColor(".passed-color", "#26B99A"),
+                            getColor(".failed-color", "#E74C3C"),
+                            getColor(".pending-color", "#FFD119"),
+                            getColor(".skipped-color", "#3498DB"),
+                            getColor(".ambiguous-color", "#b73122"),
+                            getColor(".not-defined-color", "#F39C12")
+                        ]
+                    }]
+                },
+                options: scenarioOptions
+            });
+
+            $('.x_title').on('click', function () {
+    var $BOX_PANEL = $(this).closest('.x_panel'),
+        $ICON = $(this).find('.collapse-link i'),
+        $BOX_CONTENT = $BOX_PANEL.find('.x_content');
+
+    // fix for some div with hardcoded fix class
+    if ($BOX_PANEL.attr('style')) {
+        $BOX_CONTENT.slideToggle(200, function () {
+            $BOX_PANEL.removeAttr('style');
+        });
+    } else {
+        $BOX_CONTENT.slideToggle(200);
+        $BOX_PANEL.css('height', 'auto');
+    }
+
+    $ICON.toggleClass('fa-chevron-up fa-chevron-down');
+});
+
+$('body').tooltip({
+    selector: '[data-toggle="tooltip"]'
+});
+
+hideResult = (resultId) => {
+    $('span[class*=step]').closest('div.x_panel[style]').hide();
+    $('span[class*=' + resultId + ']').closest('div.x_panel[style]').show();
+}
+
+showAll = () => {
+    $('span[class*=step]').closest('div.x_panel[style]').show();
+}
+
+$(document).ready(() => {
+    const status = ['passed', 'failed', 'pending', 'skipped', 'ambiguous', 'not-defined']
+    status.forEach(value => {
+        var menuItem = $('span[class*=' + value + '-background]');
+        if (menuItem.length === 0) {
+            $('#' + value).parent().addClass('disabled');
+        }
+    })
+});
+
+        });
+    </script>
+</body>
+</html>
