@@ -1,4 +1,5 @@
-const report = require("multiple-cucumber-html-reporter");
+const newLocal = "multiple-cucumber-html-reporter";
+const report = require(newLocal);
 report.generate({
   jsonDir: "jsonlogs", // ** Path of .json file **//
   reportPath: "./reports/cucumber-htmlreport",
