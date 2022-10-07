@@ -57,7 +57,31 @@ class MainPage {
   get releaseNotesLink(){
     return cy.get('[href="/release-notes"]');
   }
+  get careersLink(){
+    return cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(2) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span');
+  }
+  get numberLookupLink(){
+    return cy.get('div [data-e2e="Footer--navItem-products"] >div a[href="/number-lookup"]');
+  }
+  get verifyApiLink(){
+    return cy.get('div [data-e2e="Footer--navItem-products"] >div a[href="/products/verify-api"]');
+  }
+  get sliderTrackMakeOutboundCalls(){
+    return cy.get(':nth-child(4) > .telnyx-slider > .ant-slider > .ant-slider-track');
+  } 
+  get sliderHandleMakeOutboundCalls(){
+    return cy.get(':nth-child(4) > .telnyx-slider > .ant-slider > .ant-slider-handle');
+  } 
+  
+  get  sliderReceiveInboundCall(){
+    return cy.get(':nth-child(5) > .telnyx-slider > .ant-slider > .ant-slider-step');
+  }
+  get sliderForm(){
+    return cy.get('.sc-1e626587-1');
+  }
+  
 
+  
 
 }
 

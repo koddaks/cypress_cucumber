@@ -1,4 +1,5 @@
 import {  Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import numberLookup from "../../pageobjects/numberLookup";
 const base = require("../../pageobjects/base");
 const mainpage = require("../../pageobjects/mainpage");
 const dataPrivacyPage = require("../../pageobjects/dataPrivacy");
@@ -7,6 +8,7 @@ const supportCenter = require("../../pageobjects/supportCenter");
 const termsAndConditions = require("../../pageobjects/termsAndConditions");
 const releaseNotesPage = require("../../pageobjects/releaseNotes");
 const resourceHub = require("../../pageobjects/resourceHub");
+const verifyApiPage = require("../../pageobjects/verifyApi");
 const whatPageWeOn = require("../../e2e/helper/whatPageWeOn");
 
 Given('I am on the Telnyx page and click the cookies', () => {
@@ -39,13 +41,13 @@ Then('I redirected to “About Us” page', async() => {
     });
   //Scenario#2
 When('I scroll to “Careers” link at the bottom of the page', async() => {
-   cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(2) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span').scrollIntoView();
+    mainpage.careersLink.scrollIntoView();
     });
   Then('I click into “Careers” link', async() => {
-    cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(2) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span').click();
+    mainpage.careersLink.click();
       });
 Then('I redirected to “Careers” page', async() => {    
-      whatPageWeOn.pageShouldBe('https://telnyx.com/company/careers');
+    whatPageWeOn.pageShouldBe('https://telnyx.com/company/careers');
       });
 Then('I scroll to the headline “The Telnyx experience”', async() => {    
     // cy.xpath('//h2[contains(text(),"The Telnyx experience")]').scrollIntoView();
@@ -309,3 +311,44 @@ Then('I select all the checkboxes in the “Filter release notes by product” s
     releaseNotesPage.numbers.click().should('have.attr', 'aria-checked', 'true');
     whatPageWeOn.currentUrlShouldInclude('numbers');
   });
+//Scenario#13
+When('I scroll to the “Number Lookup” link at the bottom of the page', async() => {
+    mainpage.numberLookupLink.scrollIntoView();
+}); 
+Then('I click “Number Lookup” link.', async() => {
+    mainpage.numberLookupLink.click();
+    whatPageWeOn.currentUrlShouldInclude('/number-lookup');
+});
+Then('I check image to the right from “Know the details behind every number with Phone Number Lookup” header', async() => {
+    numberLookup.numberLookupImageToTheRightFromFirstHeader.should('be.visible');
+});
+//Scenario#14
+When('I scroll to the “How much will you save?” text of the page', async() => {
+  mainpage.sliderForm.scrollIntoView({ duration: 2000 });
+}); 
+Then('I check “Make outbound calls” slider', async() => {
+  cy.get(':nth-child(4) > .sc-1a5981e5-4 > :nth-child(1)')
+  mainpage.sliderHandleMakeOutboundCalls.scrollIntoView({ duration: 2000 }).invoke('attr', 'class', 'ant-slider-handle-click-focused');
+  mainpage.sliderTrackMakeOutboundCalls.invoke('attr', 'style', 'width: 69.0%;');
+ cy.get(':nth-child(4) > .telnyx-slider > .ant-slider > .ant-slider-handle-click-focused').invoke('attr', 'style', 'left: 69.0%;');
+ cy.get(':nth-child(4) > .telnyx-slider > .ant-slider > .ant-slider-handle-click-focused').invoke('attr', 'aria-valuenow', '690000');
+ 
+  
+});
+//Scenario#15
+When('I scroll to “Verify API” link at the bottom of the page', async() => {
+  mainpage.verifyApiLink.scrollIntoView();
+  
+}); 
+Then('I click into “Verify API” link', async() => {
+  mainpage.verifyApiLink.click();
+});
+Then('I redirected to “Verify API” page', async() => {
+  whatPageWeOn.currentUrlShouldInclude('/verify-api');
+});
+Then('I click into “Get Free Testing Credit” button', async() => {
+  verifyApiPage.getFreeTestingCreditBtn.click();
+});
+Then('I redirected to “sign-up” page', async() => {
+  whatPageWeOn.currentUrlShouldInclude('/sign-up');
+});
