@@ -1,0 +1,1 @@
+cy.get(':nth-child(1) > .sc-3e56386e-4 > .sc-3e56386e-5 > .sc-3e56386e-2 > .Text-sc-5o8owa-0')

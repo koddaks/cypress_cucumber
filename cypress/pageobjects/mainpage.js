@@ -51,8 +51,12 @@ class MainPage {
   get linkedinLink(){
     return cy.get('[href="https://www.linkedin.com/company/telnyx/"]');
   }
-
-  
+  get resourceHubLink(){
+    return cy.get('[href="/learn"]');
+  }
+  get releaseNotesLink(){
+    return cy.get('[href="/release-notes"]');
+  }
 
 
 }

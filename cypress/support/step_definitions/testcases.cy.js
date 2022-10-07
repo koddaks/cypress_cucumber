@@ -5,11 +5,12 @@ const dataPrivacyPage = require("../../pageobjects/dataPrivacy");
 const reportAbusePage = require("../../pageobjects/reportAbuse");
 const supportCenter = require("../../pageobjects/supportCenter");
 const termsAndConditions = require("../../pageobjects/termsAndConditions");
+const resourceHub = require("../../pageobjects/resourceHub");
 const whatPageWeOn = require("../../e2e/helper/whatPageWeOn");
 
 Given('I am on the Telnyx page and click the cookies', () => {
   base.navigate();
-  cy.contains('Accept and close').click();
+  // cy.contains('Accept and close').click();
 });
 //Scenario#1
 When('I scroll to “About Us” link at the bottom of the page', async() => {
@@ -174,25 +175,71 @@ Then('I redirected to “About Us” page', async() => {
   whatPageWeOn.currentUrlShouldInclude('facebook.com');
   cy.screenshot();
            });  
-  //Scenario#9
-  When('I scroll to “Follow on Twitter” link at the bottom of the page', async() => {
+//Scenario#9
+When('I scroll to “Follow on Twitter” link at the bottom of the page', async() => {
     mainpage.twitterLink.scrollIntoView();
   }); 
-  Then('I click into “Follow on Twitter” link', async() => {
+Then('I click into “Follow on Twitter” link', async() => {
    mainpage.twitterLink.invoke('removeAttr', 'target').click();
   });
-  Then('I redirected to “Twitter” page', async() => {
+Then('I redirected to “Twitter” page', async() => {
   whatPageWeOn.currentUrlShouldInclude('twitter.com');
   cy.screenshot();
            });
   //Scenario#10
-  When('I scroll to “Connect on LinkedIn” link at the bottom of the page', async() => {
+When('I scroll to “Connect on LinkedIn” link at the bottom of the page', async() => {
     mainpage.linkedinLink.scrollIntoView();
   }); 
-  Then('I click into “Connect on LinkedIn” link', async() => {
+Then('I click into “Connect on LinkedIn” link', async() => {
    mainpage.linkedinLink.invoke('removeAttr', 'target').click();   
   });
-  Then('I redirected to “LinkedIn” page', async() => {    
+Then('I redirected to “LinkedIn” page', async() => {    
   whatPageWeOn.currentUrlShouldInclude('linkedin.com');
   cy.screenshot();  
 });
+//Scenario#11
+When('I scroll to the “Resource Hub” link', async() => {
+  mainpage.resourceHubLink.scrollIntoView();
+}); 
+Then('I click “Resource Hub” link.', async() => {
+  mainpage.resourceHubLink.click();   
+});
+Then('I redirected to “Resource Hub” page', async() => {    
+whatPageWeOn.currentUrlShouldInclude('/learn');
+});
+Then('I check “Resource Hub” for the presence of eight titles and their corresponding images', async() => {
+  resourceHub.smsGuideImage.should('be.visible');
+  resourceHub.smsGuide.should('contain', 'SMS Guide');
+
+  resourceHub.voipGuideImage.should('be.visible');
+  resourceHub.voipGuide.should('contain', 'VoIP Guide');
+
+  resourceHub.sipTrunkGuideImage.should('be.visible');
+  resourceHub.sipTrunkGuide.should('contain', 'SIP Trunk Guide');
+
+  resourceHub.webRtcGuideImage.should('be.visible');
+  resourceHub.webRtcGuide.should('contain', 'WebRTC Guide');
+
+  resourceHub.iotGuideImage.should('be.visible');
+  resourceHub.iotGuide.should('contain', 'IoT Guide');
+
+  resourceHub.twoFactorAuthenticationGuideImage.should('be.visible');
+  resourceHub.twoFactorAuthenticationGuide.should('contain', 'Two-Factor Authentication Guide');
+
+  resourceHub.faxGuide.scrollIntoView({ duration: 2000 }).should('contain', 'Fax Guide');
+  resourceHub.faxGuideImage.should('be.visible');
+
+  resourceHub.shakenStirGuideImage.should('be.visible');
+  resourceHub.shakenStirGuide.should('contain', 'SHAKEN/STIR Guide');
+  });
+//Scenario#12
+When('I scroll to the “Release Notes” link in the bottom of the page', async() => {
+     mainpage.releaseNotesLink.scrollIntoView();
+    }); 
+Then('I click “Release Notes” link.', async() => {
+    mainpage.releaseNotesLink.click();
+    whatPageWeOn.currentUrlShouldInclude('/release-notes');
+    });
+Then('I select all the checkboxes in the “Filter release notes by product” section', async() => {    
+    
+  });
