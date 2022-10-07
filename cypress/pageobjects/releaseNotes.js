@@ -44,7 +44,7 @@ class ReleaseNotes{
   get messaging(){
     return cy.get('[for="messaging"]');
   }
-  get voiceApi(){
+  get numbers(){
     return cy.get('[for="numbers"]');
   }
 

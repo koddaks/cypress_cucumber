@@ -5,12 +5,13 @@ const dataPrivacyPage = require("../../pageobjects/dataPrivacy");
 const reportAbusePage = require("../../pageobjects/reportAbuse");
 const supportCenter = require("../../pageobjects/supportCenter");
 const termsAndConditions = require("../../pageobjects/termsAndConditions");
+const releaseNotesPage = require("../../pageobjects/releaseNotes");
 const resourceHub = require("../../pageobjects/resourceHub");
 const whatPageWeOn = require("../../e2e/helper/whatPageWeOn");
 
 Given('I am on the Telnyx page and click the cookies', () => {
   base.navigate();
-  // cy.contains('Accept and close').click();
+  cy.contains('Accept and close').click();
 });
 //Scenario#1
 When('I scroll to “About Us” link at the bottom of the page', async() => {
@@ -37,16 +38,16 @@ Then('I redirected to “About Us” page', async() => {
     cy.contains('Automated number portability').should('be.visible');    
     });
   //Scenario#2
-  When('I scroll to “Careers” link at the bottom of the page', async() => {
+When('I scroll to “Careers” link at the bottom of the page', async() => {
    cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(2) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span').scrollIntoView();
     });
   Then('I click into “Careers” link', async() => {
     cy.get('[data-e2e="Footer--navItem-company"] > div > .sc-7b6c9f9b-6 > :nth-child(2) > .sc-f97529d6-0 > .sc-6c41f57a-0 > span').click();
       });
-  Then('I redirected to “Careers” page', async() => {    
+Then('I redirected to “Careers” page', async() => {    
       whatPageWeOn.pageShouldBe('https://telnyx.com/company/careers');
       });
-  Then('I scroll to the headline “The Telnyx experience”', async() => {    
+Then('I scroll to the headline “The Telnyx experience”', async() => {    
     // cy.xpath('//h2[contains(text(),"The Telnyx experience")]').scrollIntoView();
     cy.contains('The Telnyx experience').scrollIntoView();
     // cy.xpath('//h3[contains(text(),"Flexible, global team")]').should('be.visible');
@@ -58,8 +59,8 @@ Then('I redirected to “About Us” page', async() => {
     // cy.xpath('//h3[contains(text(),"We have fun too!")]').should('be.visible');
     cy.contains('We have fun too!').should('be.visible'); 
         });
-  //Scenario#3
-  When('I scroll to the “Momentum leader and highest satisfaction in G2 CPaaS grid” header of the page', async() => {
+//Scenario#3
+When('I scroll to the “Momentum leader and highest satisfaction in G2 CPaaS grid” header of the page', async() => {
     cy.contains('Momentum leader and highest satisfaction in G2 CPaaS grid').scrollIntoView();
   });
   Then('I check for a “list of awards and nominations” for summer 2021.', async() => {
@@ -72,58 +73,58 @@ Then('I redirected to “About Us” page', async() => {
     mainpage.listOfAwardsBestMostImplementable.should('be.visible');        
     mainpage.listOfAwardsBestMostImplementable.should('be.visible');
        });
-  //Scenario#4
-  When('I scroll to the “Data & Privacy” link', async() => {
+//Scenario#4
+When('I scroll to the “Data & Privacy” link', async() => {
     mainpage.dataPrivacyLink.scrollIntoView();
          });
-  Then('I click “Data & Privacy” link.', async() => {
+Then('I click “Data & Privacy” link.', async() => {
     mainpage.dataPrivacyLink.click();
     whatPageWeOn.currentUrlShouldInclude('/data-privacy')
          
            });
-  Then('I check To the right of the heading "Data & Privacy" image', async() => {
+Then('I check To the right of the heading "Data & Privacy" image', async() => {
     dataPrivacyPage.dataPrivacyImageInTheTop.should('be.visible').screenshot();
            });
-  //Scenario#5
-  When('I scroll to the “Report Abuse” link in the bottom of the page', async() => {
+//Scenario#5
+When('I scroll to the “Report Abuse” link in the bottom of the page', async() => {
     mainpage.reportAbuseLink.scrollIntoView();
          });
-  Then('I click “Report Abuse” link', async() => {
+Then('I click “Report Abuse” link', async() => {
     mainpage.reportAbuseLink.click();
     whatPageWeOn.currentUrlShouldInclude('/report-abuse')
          
            });
-  Then('I check “reCAPTCHA validation”', async() => {    
+Then('I check “reCAPTCHA validation”', async() => {    
     reportAbusePage.submitBtn.scrollIntoView({ duration: 2000 });
     reportAbusePage.reCaptchaImage.should('be.visible');
     cy.screenshot();
            });
   //Scenario#6
-   Given('I am on the Support Center page', () => {
+Given('I am on the Support Center page', () => {
    base.navigateToSupportCenter();
    whatPageWeOn.pageShouldBe('https://support.telnyx.com/en/');
           });
-  When('I type “Sign up” in search field and press Enter on the keyboard', async() => {
+When('I type “Sign up” in search field and press Enter on the keyboard', async() => {
     supportCenter.searchField.type('Sign up{Enter}');
   });
  
-  Then('I click on the first search “result”', async() => {
+Then('I click on the first search “result”', async() => {
     supportCenter.searchResultHowSignUp.click();
     whatPageWeOn.currentUrlShouldInclude('how-to-sign-up-for-a-telnyx-account');
            });
-  Then('I scroll to header “Signing up for an account” and find example registration form image under it', async() => {
+Then('I scroll to header “Signing up for an account” and find example registration form image under it', async() => {
     supportCenter.searchResultSignUpImage.scrollIntoView({ duration: 2000 }).should('be.visible').screenshot();
            });
-  //Scenario#7  
-   When('I scroll to the “Website Terms and Conditions” link at the bottom of the page', async() => {
+//Scenario#7  
+When('I scroll to the “Website Terms and Conditions” link at the bottom of the page', async() => {
      mainpage.termsAndConditionsLink.scrollIntoView();
    });
   
-   Then('I click “Website Terms and Conditions” link.', async() => {
+Then('I click “Website Terms and Conditions” link.', async() => {
     mainpage.termsAndConditionsLink.click();
     whatPageWeOn.currentUrlShouldInclude('/terms-and-conditions')
             });
-   Then('I scroll to Headline  “Terms and Conditions”', async() => {
+Then('I scroll to Headline  “Terms and Conditions”', async() => {
      termsAndConditions.termsAndConditionsHeader.scrollIntoView().screenshot();  
      termsAndConditions.terms.should('contain', 'Terms');
      termsAndConditions.termsText.should('contain', 'By accessing this website, you are agreeing to be bound by these website Terms and Conditions of Use, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trade mark law.');
@@ -164,14 +165,14 @@ Then('I redirected to “About Us” page', async() => {
      termsAndConditions.termination.should('contain', 'Termination');
      termsAndConditions.terminationText.should('contain', 'Telnyx reserves the right, without notice and in its sole discretion, to terminate your license to use the website and to block or prevent your future access to, and use of, the website.');
             });
-  //Scenario#8
-  When('I scroll to “Follow on Facebook” link at the bottom of the page', async() => {
+//Scenario#8
+When('I scroll to “Follow on Facebook” link at the bottom of the page', async() => {
     mainpage.facebookLink.scrollIntoView();
   }); 
-  Then('I click into “Follow on Facebook” link', async() => {
+Then('I click into “Follow on Facebook” link', async() => {
    mainpage.facebookLink.invoke('removeAttr', 'target').click();   
            });
-  Then('I redirected to “Facebook” page', async() => {
+Then('I redirected to “Facebook” page', async() => {
   whatPageWeOn.currentUrlShouldInclude('facebook.com');
   cy.screenshot();
            });  
@@ -240,6 +241,71 @@ Then('I click “Release Notes” link.', async() => {
     mainpage.releaseNotesLink.click();
     whatPageWeOn.currentUrlShouldInclude('/release-notes');
     });
-Then('I select all the checkboxes in the “Filter release notes by product” section', async() => {    
+Then('I select all the checkboxes in the “Filter release notes by product” section', async() => {   
+    releaseNotesPage.voiceApi.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.voiceApi.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('voice');
+    whatPageWeOn.currentUrlShouldInclude('api');
+
+    releaseNotesPage.whatsApp.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.whatsApp.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('whatsapp');
+
+    releaseNotesPage.dlc.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.dlc.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('10dlc');
+
+    releaseNotesPage.videoRooms.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.videoRooms.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('video');
+    whatPageWeOn.currentUrlShouldInclude('rooms');
+
+    releaseNotesPage.verifyApi.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.verifyApi.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('verify');
+    whatPageWeOn.currentUrlShouldInclude('api');
+
+    releaseNotesPage.fax.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.fax.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('fax');
     
+    releaseNotesPage.reporting.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.reporting.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('reporting');
+
+    releaseNotesPage.telephony.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.telephony.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('telephony');
+    
+    releaseNotesPage.network.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.network.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('network');
+
+    releaseNotesPage.wireless.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.wireless.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('wireless');
+
+    releaseNotesPage.webrtc.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.webrtc.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('webrtc');
+
+    releaseNotesPage.missionControlPortal.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.missionControlPortal.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('mission%20control%20portal');
+
+    releaseNotesPage.api.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.api.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('api');
+
+    releaseNotesPage.account.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.account.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('account');
+
+    releaseNotesPage.messaging.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.messaging.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('messaging');
+
+    releaseNotesPage.numbers.should('have.attr', 'aria-checked', 'false');
+    releaseNotesPage.numbers.click().should('have.attr', 'aria-checked', 'true');
+    whatPageWeOn.currentUrlShouldInclude('numbers');
   });
